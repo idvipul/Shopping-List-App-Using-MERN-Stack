@@ -1,0 +1,30 @@
+{
+  "name": "shopping-list-app-using-mern-stack",
+  "version": "1.0.0",
+  "description": "Shopping List buit using MERN Stack",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idvipul/Shopping-List-App-Using-MERN-Stack.git"
+  },
+  "author": "Vipul Karanjkar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/idvipul/Shopping-List-App-Using-MERN-Stack/issues"
+  },
+  "homepage": "https://github.com/idvipul/Shopping-List-App-Using-MERN-Stack#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.1",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
