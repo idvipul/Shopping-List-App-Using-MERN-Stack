@@ -13,29 +13,31 @@ export class ShoppingList extends Component {
   }
 
   componentDidMount() {
-      axios.get('api/items')
-        .then(res => {
-            this.setState({
-                items: res.data
-            });
-        })
-        .catch(err => console.log("Error: " + err));
+    axios
+      .get("http://localhost:5000/api/items")
+      .then(res => {
+        this.setState({
+          items: res.data
+        });
+      })
+      .catch(err => console.log("Error: " + err));
   }
 
   addItem = () => {
     const name = prompt("Enter item");
 
     if (name) {
-        axios.post('/api/items', name)
-            // .then(res => console.log(res.data))
-            .then(this.setState(state => ({
-                items: [...state.items, { name } ]
-            })))
-            .catch(err => console.log(err))
+      axios
+        .post("http://localhost:5000/api/items", { name } )
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err));
+
+        window.location = '/';
     }
   };
 
   deleteItem = id => {
+    console.log(id);
     this.setState(state => ({
       items: state.items.filter(item => item.id !== id)
     }));
@@ -56,14 +58,14 @@ export class ShoppingList extends Component {
         <ListGroup>
           <br />
           <TransitionGroup className="shopping-list">
-            {items.map(({ id, name }) => (
-              <CSSTransition key={id} timeout={500} classNames="fade">
+            {items.map(({ _id, name }) => (
+              <CSSTransition key={_id} timeout={500} classNames="fade">
                 <ListGroupItem>
                   <Button
                     className="remove-btn"
                     color="danger"
                     size="sm"
-                    onClick={() => this.deleteItem(id)}
+                    onClick={() => this.deleteItem(_id)}
                   >
                     &times;
                   </Button>

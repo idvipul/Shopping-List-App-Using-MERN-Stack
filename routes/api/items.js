@@ -6,7 +6,7 @@ const Item = require("../../models/Item");
 
 // @route   GET api/items
 // @desc    Get all items
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   Item.find()
     .sort({ date: -1 }) // Desc order by Date
     .then(items => res.status(200).json(items))
@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 
 // @route   POST api/items
 // @desc    Create an item
-router.post("/", (req, res) => {
+router.post("/", (req, res, next) => {
   const newItem = new Item({
     name: req.body.name
   });
