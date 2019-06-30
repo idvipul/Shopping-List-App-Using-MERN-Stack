@@ -1,26 +1,37 @@
 import React, { Component } from "react";
 import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import uuid from "uuid";
+import axios from "axios";
 
 export class ShoppingList extends Component {
-  state = {
-    items: [{ id: uuid(), name: "Milk" }, { id: uuid(), name: "Egg" }]
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      items: []
+    };
+  }
+
+  componentDidMount() {
+      axios.get('api/items')
+        .then(res => {
+            this.setState({
+                items: res.data
+            });
+        })
+        .catch(err => console.log("Error: " + err));
+  }
 
   addItem = () => {
     const name = prompt("Enter item");
 
     if (name) {
-      this.setState(state => ({
-        items: [
-          ...state.items,
-          {
-            id: uuid(),
-            name
-          }
-        ]
-      }));
+        axios.post('/api/items', name)
+            // .then(res => console.log(res.data))
+            .then(this.setState(state => ({
+                items: [...state.items, { name } ]
+            })))
+            .catch(err => console.log(err))
     }
   };
 
@@ -40,10 +51,10 @@ export class ShoppingList extends Component {
           onClick={this.addItem}
         >
           Add Item{" "}
-        </Button> 
+        </Button>
 
         <ListGroup>
-        <br />
+          <br />
           <TransitionGroup className="shopping-list">
             {items.map(({ id, name }) => (
               <CSSTransition key={id} timeout={500} classNames="fade">
