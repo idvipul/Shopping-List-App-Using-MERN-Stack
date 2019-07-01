@@ -21,11 +21,14 @@
   },
   "homepage": "https://github.com/idvipul/Shopping-List-App-Using-MERN-Stack#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.1",
+    "config": "^3.1.0",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.2"
   },
   "devDependencies": {
