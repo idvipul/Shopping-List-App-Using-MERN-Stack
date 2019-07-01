@@ -9,6 +9,7 @@ const User = require("../../models/User");
 
 // @route   GET api/users
 // @desc    Get all users
+// @access  Public
 router.get("/", (req, res, next) => {
   User.find()
     .then(users => res.status(200).json(users))
@@ -17,6 +18,7 @@ router.get("/", (req, res, next) => {
 
 // @route   POST api/users
 // @desc    Register all users
+// @access  Public
 router.post("/", (req, res, next) => {
   const { name, email, password } = req.body;
 

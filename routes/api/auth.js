@@ -3,12 +3,14 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
+const auth = require('../../middleware/auth');
 
 // User Model
 const User = require("../../models/User");
 
 // @route   POST api/auth
 // @desc    Register all users
+// @access  Public
 router.post("/", (req, res, next) => {
   const { email, password } = req.body;
 
@@ -48,5 +50,14 @@ router.post("/", (req, res, next) => {
         })
   });
 });
+
+// @route   GET api/auth/users
+// @desc    Get user data
+// @access  Private
+router.get('/user', auth, (req, res) => {
+    User.findById(req.user.id)
+        .select('-password')
+        .then(user => res.json(user))
+})
 
 module.exports = router;
