@@ -28,19 +28,26 @@ export class ShoppingList extends Component {
 
     if (name) {
       axios
-        .post("http://localhost:5000/api/items", { name } )
+        .post("http://localhost:5000/api/items", { name })
         .then(res => console.log(res.data))
         .catch(err => console.log(err));
 
-        window.location = '/';
+      window.location = "/";
     }
   };
 
   deleteItem = id => {
-    console.log(id);
-    this.setState(state => ({
-      items: state.items.filter(item => item.id !== id)
-    }));
+    axios
+      .delete("http://localhost:5000/api/items/" + id)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+
+    // Delete the item the UI
+    this.setState({
+      items: this.state.items.filter(el => {
+        return el._id !== id;
+      })
+    });
   };
 
   render() {
